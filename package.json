@@ -19,7 +19,8 @@
     "grunt-contrib-less": "*",
     "express" : "*",
     "cors" : "*",
-    "request": "*"
+    "request": "*",
+    "body-parser": "*"
   },
   "engines": {
     "node": "0.8.x"
