@@ -5,6 +5,7 @@ var bodyParser      = require('body-parser');
 
 var twitterReq      = require('./modules/twitter-requests.js');
 var giphyReq        = require('./modules/giphy-requests.js');
+var contentApi      = require('./modules/content-api.js');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -13,7 +14,7 @@ app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 
 app.get('/get-giphy', function(req, res){
-   twitterReq(); 
+   contentApi(10141, '9WmTValX0nUTgZC37bxV1cRIoJwJPG'); 
    res.send('complete');
 });
 
