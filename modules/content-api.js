@@ -6,15 +6,30 @@ function contentAPI(campaignInfo, callback) {
                campaignInfo.gallery +
                '?access_token=' +
                campaignInfo.access_token +
-               '&social_platform=instagram,twitter';
+               '&social_platform=twitter&media_type=text';
 
      request(url, function(error, response, body) {
           if (!error && response.statusCode == 200) {
-               console.log('data', JSON.parse(body));
                var parsed = JSON.parse(body);
-               callback(parsed);
+               var ugc = parsed['_embedded']['ugc:item'];
+               var filtered = ugc.map(storeUgcData);
+
+               callback(filtered);
           }
      });
-}
+};
+
+function storeUgcData(ugc) {
+     var content = ugc.content;
+     var single = {
+          author: content.author.username,
+          avatar: content.author.profile.avatar,
+          caption: content.text,
+          platform_link: content.platform_data.social_platform_original_url,
+          timestamp: new Date(content.created_on).toDateString()
+     };
+
+     return single;
+};
 
 module.exports = contentAPI;

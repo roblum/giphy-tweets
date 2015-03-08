@@ -11,7 +11,7 @@ function filterRequest(req, res) {
      contentApi(campaignInfo, giphyApi);
 
      function giphyApi(data) {
-          res.send('complete');
+          res.send(data);
      }
 }
 
